@@ -129,3 +129,12 @@ NOTE, in the future, everytime you test multiple apps on monado, you have to rem
 	
 
 
+----------------------TO Run Overlay App
+
+1. git clone https://gitlab.freedesktop.org/monado/demos/xrgears.git
+2. git checkout overlay
+3. CC=clang CXX=clang++ meson build
+4. ninja -C build
+5. Run monado-service
+6. run anyother app
+7. run xrgear
