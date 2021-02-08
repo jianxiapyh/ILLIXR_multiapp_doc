@@ -95,6 +95,7 @@ NOTE, in the future, everytime you test multiple apps on monado, you have to rem
 13. Install OpenXR driver for Godot
 	In Another folder (outside ILLIXR and Apps and Godot)
 	- git clone https://github.com/ILLIXR/godot_openxr.git
+	- cd godot_openxr.git
 	- git submodule init
 	- git submodule update
 	- scons platform=linux use_llvm=yes
