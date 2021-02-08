@@ -38,7 +38,7 @@ How to Run Multiple Apps On Monado With ILLIXR
 
 
 
-4. run ./runner.sh config/native.yaml
+4. run ./runner.sh configs/native.yaml
 
 
 5. open ~/.bashrc and the following code (make sure you fill in the correct path)
