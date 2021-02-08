@@ -8,8 +8,11 @@ How to Run Multiple Apps On Monado With ILLIXR
 	- Otherwise 
 		git clone --branch new-monado https://github.com/ILLIXR/ILLIXR.git
 
+2. Open ~/.bashrc and add the following line
+	export CXX=clang++-10
 
-2. Build necessary ILLIXR Plugins:
+
+3. Build necessary ILLIXR Plugins:
 	- runtime
 	- offline_imu_cam
 	- gtsam_integrator
@@ -21,7 +24,7 @@ How to Run Multiple Apps On Monado With ILLIXR
 		2. make clean
 		3. make plugin.dbg.so
 
-3. Open configs/rt_slam_plugins.yaml
+4. Open configs/rt_slam_plugins.yaml
 
    make sure OpenVins is not commented out and Kimero-VIO is commented out
 
@@ -38,26 +41,25 @@ How to Run Multiple Apps On Monado With ILLIXR
 
 
 
-4. run ./runner.sh configs/native.yaml
+5. run ./runner.sh configs/native.yaml
 
 
-5. open ~/.bashrc and the following code (make sure you fill in the correct path)
+6. open ~/.bashrc and the following code (make sure you fill in the correct path)
 
 export XR_RUNTIME_JSON=Your Path to/monado/build/openxr_monado-dev.json
 export ILLIXR_PATH=Your Path to /ILLIXR/runtime/plugin.dbg.so
 export ILLIXR_COMP=Your Path to /ILLIXR/offline_imu_cam/plugin.dbg.so:Your Path to /ILLIXR/.cache/paths/https%c%s%sgithub.com%sILLIXR%sopen_vins.git/plugin.dbg.so:Your path to /ILLIXR/gtsam_integrator/plugin.dbg.so:Your Path to /ILLIXR/pose_prediction/plugin.dbg.so:
 export ILLIXR_DATA=Your Path to /ILLIXR/.cache/paths/http%%c%%s%%srobotics.ethz.ch%%s~asl-datasets%%sijrr_euroc_mav_dataset%%svicon_room1%%sV1_02_medium%%sV1_02_medium.zip/mav0
-export CXX=clang++-10
 
-6. source ~/.bashrc
+7. source ~/.bashrc
 
 
-7. cd .cache/paths/https%c%s%sgithub.com%sILLIXR%sopen_vins.git
+8. cd .cache/paths/https%c%s%sgithub.com%sILLIXR%sopen_vins.git
 (can be in different name in the future, but should be only one named with open_vins)
 
   - make plugin.dbg.so
 
-8. In a different folder from ILLIXR folder, clone monado and make (again change the second to last flag to your ILLIXR directory)
+9. In a different folder from ILLIXR folder, clone monado and make (again change the second to last flag to your ILLIXR directory)
 
 git clone https://gitlab.freedesktop.org/monado/monado.git
 mkdir build && cd build
@@ -65,7 +67,7 @@ mkdir build && cd build
 cmake .. -DXRT_HAVE_LIBUDEV=OFF -DXRT_HAVE_LIBUSB=OFF -DXRT_HAVE_LIBUVC=OFF -DXRT_HAVE_LIBUDEV=OFF -DXRT_HAVE_V4L2=OFF -DXRT_HAVE_SDL2=OFF -DXRT_BUILD_DRIVER_ARDUINO=OFF -DXRT_BUILD_DRIVER_OHMD=OFF -DXRT_BUILD_DRIVER_DAYDREAM=OFF -DXRT_BUILD_DRIVER_DUMMY=OFF -DXRT_BUILD_DRIVER_HDK=OFF -DXRT_BUILD_DRIVER_HYDRA=OFF -DXRT_BUILD_DRIVER_NS=OFF -DXRT_BUILD_DRIVER_PSMV=OFF -DXRT_BUILD_DRIVER_PSVR=OFF -DXRT_BUILD_DRIVER_RS=OFF -DXRT_BUILD_DRIVER_REMOTE=OFF -DXRT_BUILD_DRIVER_SURVIVE=OFF -DXRT_BUILD_DRIVER_VIVE=OFF -DXRT_BUILD_DRIVER_HANDTRACKING=OFF -DILLIXR_PATH=Your Path to /ILLIXR -G "Unix Makefiles"
 make -j X (X is your number of cores)
 
-9. test your monado compositor 
+10. test your monado compositor 
 	inside your build folder
 	cd src/xrt/target/service
 	./monado-service
@@ -73,7 +75,7 @@ make -j X (X is your number of cores)
 NOTE, in the future, everytime you test multiple apps on monado, you have to remove "monado_comp_ipc" under ~/tmp/
 
 
-10. Make a folder to store all your XR apps 
+11. Make a folder to store all your XR apps 
 
 	inside your apps folder
 	- git clone https://gitlab.freedesktop.org/monado/demos/openxr-simple-example.git
@@ -83,27 +85,27 @@ NOTE, in the future, everytime you test multiple apps on monado, you have to rem
 	- cmake ..
 	- make -j X 
 
-11. Install Godot
+12. Install Godot
 
 	In Another folder (outside ILLIXR and Apps)
 	- git clone --branch 3.2 https://github.com/godotengine/godot
 	- cd godot
 	- scons -j X platform=x11 target=release_debug
 
-12. Install OpenXR driver for Godot
+13. Install OpenXR driver for Godot
 	In Another folder (outside ILLIXR and Apps and Godot)
 	- git clone https://github.com/ILLIXR/godot_openxr.git
 	- git submodule init
 	- git submodule update
 	- scons platform=linux use_llvm=yes
 
-13. Go back to Apps
+14. Go back to Apps
 	- cd OpenXR-Apps
 	For Each APP(folder) do:
 	- rm -r addons/
 	- cp Your Path to /godot_openxr/demo/addons .
 
-14. Go to your Godot folder
+15. Go to your Godot folder
 	- cd bin/
 	- ./godot.x11.opt.tools.64
 	- Import your app (project.godot) 
